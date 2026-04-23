@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity 5 - DOM Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white; 
+            padding: 20px;
+        }
+        #banner {
+            background-color: #fdfd96; 
+            border: 2px solid black; 
+            padding: 20px; 
+            margin-bottom: 20px;
+        }
+        .button-container button {
+            margin-right: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="banner">
+        <h1>Hi there! I'm Moses.</h1>
+        <ul id="hobby-list">
+            <li>Explore the Northern Lights in Iceland</li>
+            <li>Master Full-Stack Web Development</li>
+            <li>Build a sustainable garden</li>
+        </ul>
+    </div>
+
+    <label for="new-item">Add New:</label>
+    <input type="text" id="new-item" placeholder="Type a new goal...">
+    <br><br>
+
+    <div class="button-container">
+        <button onclick="addNewItem()">Add new item on the list</button>
+        <button onclick="changeFont()">Change font family</button>
+        <button onclick="makeBold()">Make items bold</button>
+    </div>
+
+    <script>
+        /**
+         * Documentation[cite: 10]:
+         * 1. addNewItem: Grabs value from input and appends a new <li> to the list[cite: 12].
+         * 2. changeFont: Targets all <li> elements and changes their font-family[cite: 13].
+         * 3. makeBold: Toggles the font-weight of list items[cite: 14].
+         */
+
+        function addNewItem() {
+            const input = document.getElementById('new-item');
+            const list = document.getElementById('hobby-list');
+            
+            if (input.value.trim() !== "") {
+                const newItem = document.createElement('li');
+                newItem.textContent = input.value;
+                list.appendChild(newItem);
+                input.value = ""; // Clear input after adding
+            } else {
+                alert("Please enter a hobby!");
+            }
+        }
+
+        function changeFont() {
+            const listItems = document.querySelectorAll('#hobby-list li');
+            listItems.forEach(item => {
+                item.style.fontFamily = (item.style.fontFamily === 'serif') ? 'Arial, sans-serif' : 'serif';
+            });
+        }
+
+        function makeBold() {
+            const listItems = document.querySelectorAll('#hobby-list li');
+            listItems.forEach(item => {
+                item.style.fontWeight = (item.style.fontWeight === 'bold') ? 'normal' : 'bold';
+            });
+        }
+    </script>
+</body>
+</html>
